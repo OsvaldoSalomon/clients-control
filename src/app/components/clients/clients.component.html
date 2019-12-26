@@ -1,1 +1,54 @@
-<p>clients works!</p>
+<section id="actions" class="py-4 mb-4 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="addClientModel">
+          <i class="fas fa-plus"></i>Add Client
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="clients">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-header">
+            <h4>Clients List</h4>
+          </div>
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Income</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let client of clients; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{client.firstName}} {{client.lastName}}</td>
+                <td>{{client.income | currency: 'MNX': '$'}}</td>
+                <td>
+                  <a routerLink="/client/edit/{{client.id}}" class="btn btn-secondary">
+                    <i class="fas fa-angle-double-right"></i>Edit
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!--Lateral cards-->
+      <div class="col-md-3">
+        <div class="card text-center bg-danger text-white mb-3">
+          <div class="card-body"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
