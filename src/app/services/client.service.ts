@@ -28,4 +28,35 @@ export class ClientService {
     return this.clients;
   }
 
+  addClient(clientModel: ClientModel){
+    this.clientsCollection.add(clientModel);
+  }
+
+  getClient(id:string){
+    this.clientDoc = this.db.doc<ClientModel>(`clients/${id}`);
+    this.client = this.clientDoc.snapshotChanges().pipe(
+      map(
+        action=> {
+          if (action.payload.exists === false){
+            return null;
+          }
+          else {
+            const data = action.payload.data() as ClientModel;
+            data.id = action.payload.id;
+            return data;
+          }
+        })
+    );
+    return this.client;
+  }
+
+  modifyClient(client: ClientModel){
+    this.clientDoc = this.db.doc(`clients/${client.id}`);
+    this.clientDoc.update(client);
+  }
+
+  deleteClient(client: ClientModel){
+    this.clientDoc = this.db.doc(`clients/${client.id}`);
+    this.clientDoc.delete();
+  }
 }

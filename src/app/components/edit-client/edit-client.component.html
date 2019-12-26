@@ -1,1 +1,125 @@
-<p>edit-client works!</p>
+<header id="main-header" class="py-2 bg-info text-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h1>
+          <i class="fas fa-user"></i>Edit Client
+        </h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<form #clientForm="ngForm" (ngSubmit)="save(clientForm)">
+
+  <flash-messages></flash-messages>
+
+  <section id="actions" class="py-4 mb-4 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <a routerLink="/" class="btn btn-light btn-block">
+            <i class="fas fa-arrow-left"></i> Return to Start
+          </a>
+        </div>
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-success btn-block">
+            <i class="fas fa-check"></i> Update Client
+          </button>
+        </div>
+        <div class="col-md-3">
+          <a href="#" (click)="delete()" class="btn btn-danger btn-block">
+            <i class="fas fa-trash"></i> Delete Client
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="details">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header">
+              <h4>Edit Client</h4>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input
+                  #firstName="ngModel"
+                  [(ngModel)]="client.firstName"
+                  [ngClass]="{'is-invalid': firstName.errors && firstName.touched}"
+                  class="form-control"
+                  minlength="2"
+                  name="firstName"
+                  required
+                  type="text">
+                <div [hidden]="!firstName.errors?.required" class="invalid-feedback">
+                  First name required
+                </div>
+                <div [hidden]="!firstName.errors?.minlength" class="invalid-feedback">
+                  Should contain at least 2 characters
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  class="form-control"
+                  #lastName="ngModel"
+                  [(ngModel)]="client.lastName"
+                  [ngClass]="{'is-invalid': lastName.errors && lastName.touched}"
+                  required
+                  minlength="2">
+                <div [hidden]="!lastName.errors?.required" class="invalid-feedback">
+                  Last name required
+                </div>
+                <div [hidden]="!lastName.errors?.minlength" class="invalid-feedback">
+                  Should contain at least 2 characters
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  #email="ngModel"
+                  [(ngModel)]="client.email"
+                  [ngClass]="{'is-invalid': email.errors && email.touched}"
+                  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                  required>
+                <div [hidden]="!email.errors?.required" class="invalid-feedback">
+                  Email required
+                </div>
+                <div [hidden]="!email.errors?.pattern" class="invalid-feedback">
+                  Not a valid email
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="income">Income</label>
+                <input
+                  type="number"
+                  name="income"
+                  class="form-control"
+                  #income="ngModel"
+                  [(ngModel)]="client.income"
+                  [ngClass]="{'is-invalid': income.errors && income.touched}"
+                  required>
+                <div [hidden]="!income.errors?.required" class="invalid-feedback">
+                  Income required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</form>
