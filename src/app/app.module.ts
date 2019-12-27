@@ -20,6 +20,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {ClientService} from "./services/client.service";
+import {LoginService} from "./services/login.service";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import {ClientService} from "./services/client.service";
     FormsModule,
     FlashMessagesModule.forRoot()
   ],
-  providers: [ClientService],
+  providers: [ClientService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
