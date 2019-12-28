@@ -1,7 +1,6 @@
-import {Injectable} from "@angular/core";
-import {AngularFireAuth} from "@angular/fire/auth";
-import {reject} from "q";
-import {map} from "rxjs/operators";
+import { Injectable } from "@angular/core";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class LoginService {
@@ -22,6 +21,10 @@ export class LoginService {
     return this.authService.authState.pipe(
       map(auth => auth)
     );
+  }
+
+  logout(){
+    this.authService.auth.signOut();
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from "../../services/login.service";
-import {Router} from "@angular/router";
-import {auth} from "firebase";
+import { LoginService } from "../../services/login.service";
+import { Router } from "@angular/router";
+import { auth } from "firebase";
 
 @Component({
   selector: 'app-header',
@@ -32,4 +32,9 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  logout(){
+    this.loginService.logout();
+    this.isLoggedIn = false;
+    this.router.navigate(['/login']);
+  }
 }

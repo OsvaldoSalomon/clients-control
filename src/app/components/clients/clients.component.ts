@@ -1,8 +1,8 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ClientService } from "../../services/client.service";
-import {ClientModel} from "../../model/client.model";
-import {FlashMessagesService} from "angular2-flash-messages";
-import {NgForm} from "@angular/forms";
+import { ClientModel } from "../../model/client.model";
+import { FlashMessagesService } from "angular2-flash-messages";
+import { NgForm } from "@angular/forms";
 
 @Component({
   selector: 'app-clients',
@@ -24,7 +24,10 @@ export class ClientsComponent implements OnInit {
   // @ts-ignore
   @ViewChild("closeButton") closeButton: ElementRef;
 
-  constructor(private clientsService: ClientService, private flashMessages: FlashMessagesService) { }
+  constructor(
+    private clientsService: ClientService,
+    private flashMessages: FlashMessagesService
+  ) { }
 
   ngOnInit() {
     this.clientsService.getClients().subscribe(
