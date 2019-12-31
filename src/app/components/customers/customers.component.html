@@ -2,21 +2,21 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addModalClient">
-          <i class="fas fa-plus"></i> Add Client
+        <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addCustomerModel">
+          <i class="fas fa-plus"></i> add Customer
         </a>
       </div>
     </div>
   </div>
 </section>
 
-<section id="clients">
+<section id="customers">
   <div class="container">
     <div class="row">
       <div class="col-md-9">
         <div class="card">
           <div class="card-header">
-            <h4>Clients List</h4>
+            <h4>Customers List</h4>
           </div>
           <table class="table table-striped">
             <thead class="thead-dark">
@@ -24,14 +24,13 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Income</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let client of clients; let i = index">
+              <tr *ngFor="let client of customers; let i = index">
                 <td>{{i+1}}</td>
                 <td>{{client.firstName}} {{client.lastName}}</td>
-                <td>{{client.income | currency: 'MNX': '$'}}</td>
+                <td>{{client.balance | currency: 'MNX': '$'}}</td>
                 <td>
                   <a routerLink="/client/edit/{{client.id}}" class="btn btn-secondary">
                     <i class="fas fa-angle-double-right"></i>Edit
@@ -46,17 +45,17 @@
       <div class="col-md-3">
         <div class="card text-center bg-danger text-white mb-3">
           <div class="card-body">
-            <h3>Total income</h3>
+            <h3>Total Balance</h3>
             <h4 class="display-4">
-              {{getTotalIncome() | currency: 'MNX':'$'}}
+              {{getTotalBalance() | currency: 'MNX':'$'}}
             </h4>
           </div>
         </div>
         <div class="card text-center bg-success text-white mb-3">
           <div class="card-body">
-            <h3>Total clients</h3>
+            <h3>Total Customers</h3>
             <h4 class="display-4">
-              <i class="fas fa-users"></i>{{clients?.length}}
+              <i class="fas fa-users"></i>{{customers?.length}}
             </h4>
           </div>
         </div>
@@ -66,12 +65,12 @@
   </div>
 </section>
 
-<!--Add client model-->
-<div class="modal fade" id="addModalClient">
+<!--Add customer model-->
+<div class="modal fade" id="addModalCustomer">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header bg-info text-white">
-        <h5 class="modal-title">Add Client</h5>
+        <h5 class="modal-title">Add Customer</h5>
         <button class="close" data-dismiss="modal" #closeButton>
           <span>&times;</span>
         </button>
@@ -79,7 +78,7 @@
 
       <flash-messages></flash-messages>
 
-      <form #clientForm="ngForm" (ngSubmit)="add(clientForm)">
+      <form #customerForm="ngForm" (ngSubmit)="add(customerForm)">
         <div class="modal-body">
           <div class="form-group">
             <label for="firstName">First Name</label>
@@ -88,7 +87,7 @@
               name="firstName"
               class="form-control"
               #firstName="ngModel"
-              [(ngModel)]="client.firstName"
+              [(ngModel)]="customer.firstName"
               [ngClass]="{'is-invalid': firstName.errors && firstName.touched}"
               required
               minlength="2">
@@ -106,7 +105,7 @@
               name="lastName"
               class="form-control"
               #lastName="ngModel"
-              [(ngModel)]="client.lastName"
+              [(ngModel)]="customer.lastName"
               [ngClass]="{'is-invalid': lastName.errors && lastName.touched}"
               required
               minlength="2">
@@ -124,7 +123,7 @@
               name="email"
               class="form-control"
               #email="ngModel"
-              [(ngModel)]="client.email"
+              [(ngModel)]="customer.email"
               [ngClass]="{'is-invalid': email.errors && email.touched}"
               pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
               required>
@@ -136,18 +135,17 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="income">Income</label>
+            <label for="balance">Balance</label>
             <input
               type="number"
-              name="income"
+              name="balance"
               class="form-control"
-              #income="ngModel"
-              [(ngModel)]="client.income"
-              [ngClass]="{'is-invalid': income.errors && income.touched}"
+              #balance="ngModel"
+              [(ngModel)]="customer.balance"
+              [ngClass]="{'is-invalid': balance.errors && balance.touched}"
               required>
-            <div [hidden]="!income.errors?.required" class="invalid-feedback">
-              Income required
-
+            <div [hidden]="!balance.errors?.required" class="invalid-feedback">
+              Balance required
             </div>
           </div>
         </div>
@@ -155,7 +153,6 @@
           <button type="submit" class="btn btn-primary">Save</button>
         </div>
       </form>
-
     </div>
   </div>
 </div>

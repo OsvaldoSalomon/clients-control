@@ -107,7 +107,7 @@
                   name="income"
                   class="form-control"
                   #income="ngModel"
-                  [(ngModel)]="client.income"
+                  [(ngModel)]="client.balance"
                   [ngClass]="{'is-invalid': income.errors && income.touched}"
                   required>
                 <div [hidden]="!income.errors?.required" class="invalid-feedback">

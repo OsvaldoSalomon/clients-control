@@ -1,61 +1,61 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ClientService } from "../../services/client.service";
-import { ClientModel } from "../../model/client.model";
+import { CustomerModel } from "../../model/customer.model";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { NgForm } from "@angular/forms";
 
 @Component({
   selector: 'app-clients',
-  templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.css']
+  templateUrl: './customers.component.html',
+  styleUrls: ['./customers.component.css']
 })
-export class ClientsComponent implements OnInit {
+export class CustomersComponent implements OnInit {
 
-  clients: ClientModel[];
-  client: ClientModel = {
+  customers: CustomerModel[];
+  customer: CustomerModel = {
     firstName: '',
     lastName: '',
     email: '',
-    income: 0
+    balance: 0
   };
 
   // @ts-ignore
-  @ViewChild("clientForm") clientForm: NgForm;
+  @ViewChild("customerForm") customerForm: NgForm;
   // @ts-ignore
   @ViewChild("closeButton") closeButton: ElementRef;
 
   constructor(
-    private clientsService: ClientService,
+    private customersService: ClientService,
     private flashMessages: FlashMessagesService
   ) { }
 
   ngOnInit() {
-    this.clientsService.getClients().subscribe(
+    this.customersService.getCustomers().subscribe(
       clients => {
-        this.clients = clients;
+        this.customers = clients;
       }
     )
   }
 
-  getTotalIncome(){
-    let totalIncome: number = 0;
-    if (this.clients){
-      this.clients.forEach( client => {
-        totalIncome += client.income;
+  getTotalBalance(){
+    let totalBalance: number = 0;
+    if (this.customers){
+      this.customers.forEach(customer => {
+        totalBalance += customer.balance;
       })
     }
-    return totalIncome;
+    return totalBalance;
   }
 
-  add({value, valid}: {value: ClientModel, valid: boolean}){
+  add({value, valid}: {value: CustomerModel, valid: boolean}){
     if (!valid){
       this.flashMessages.show('Please fill out the form correctly', {
         cssClass: 'alert-danger', timeout: 4000
       });
     }
     else {
-      this.clientsService.addClient(value);
-      this.clientForm.resetForm();
+      this.customersService.addClient(value);
+      this.customerForm.resetForm();
       this.closeModal();
     }
   }

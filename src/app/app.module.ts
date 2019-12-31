@@ -12,8 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TableComponent } from './components/table/table.component';
-import { ClientsComponent } from './components/clients/clients.component';
-import { EditClientComponent } from './components/edit-client/edit-client.component';
+import { CustomersComponent } from './components/customers/customers.component';
+import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -21,14 +21,15 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {ClientService} from "./services/client.service";
 import {LoginService} from "./services/login.service";
+import {AuthGuard} from "./guardians/auth.guard";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     TableComponent,
-    ClientsComponent,
-    EditClientComponent,
+    CustomersComponent,
+    EditCustomerComponent,
     LoginComponent,
     RegisterComponent,
     SettingsComponent,
@@ -38,13 +39,13 @@ import {LoginService} from "./services/login.service";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firestore, 'clients-control'),
+    AngularFireModule.initializeApp(environment.firestore, 'customers-control'),
     AngularFirestoreModule,
     AngularFireAuthModule,
     FormsModule,
     FlashMessagesModule.forRoot()
   ],
-  providers: [ClientService, LoginService],
+  providers: [ClientService, LoginService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

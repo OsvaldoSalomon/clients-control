@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientModel } from "../../model/client.model";
+import { CustomerModel } from "../../model/customer.model";
 import { ClientService } from "../../services/client.service";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-edit-client',
-  templateUrl: './edit-client.component.html',
-  styleUrls: ['./edit-client.component.css']
+  templateUrl: './edit-customer.component.html',
+  styleUrls: ['./edit-customer.component.css']
 })
-export class EditClientComponent implements OnInit {
+export class EditCustomerComponent implements OnInit {
 
-  client: ClientModel = {
+  client: CustomerModel = {
     firstName: '',
     lastName: '',
     email: '',
-    income: 0
+    balance: 0
   };
 
   id:string;
@@ -34,7 +34,7 @@ export class EditClientComponent implements OnInit {
     });
   }
 
-  save({value, valid}: {value: ClientModel, valid: boolean}){
+  save({value, valid}: {value: CustomerModel, valid: boolean}){
     if (!valid){
       this.flashMessages.show('Please fill out the form correctly', {
         cssClass: 'alert-danger', timeout: 4000
@@ -48,7 +48,7 @@ export class EditClientComponent implements OnInit {
   }
 
   delete(){
-    if (confirm('Are you sure you want to delete the client?')) {
+    if (confirm('Are you sure you want to delete the customer?')) {
       this.clientsService.deleteClient(this.client);
       this.router.navigate(['/']);
     }
