@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ClientService } from "../../services/client.service";
+import { CustomerService } from "../../services/customer.service";
 import { CustomerModel } from "../../model/customer.model";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { NgForm } from "@angular/forms";
@@ -16,7 +16,7 @@ export class CustomersComponent implements OnInit {
     firstName: '',
     lastName: '',
     email: '',
-    balance: 0
+    income: 0
   };
 
   // @ts-ignore
@@ -25,7 +25,7 @@ export class CustomersComponent implements OnInit {
   @ViewChild("closeButton") closeButton: ElementRef;
 
   constructor(
-    private customersService: ClientService,
+    private customersService: CustomerService,
     private flashMessages: FlashMessagesService
   ) { }
 
@@ -41,7 +41,7 @@ export class CustomersComponent implements OnInit {
     let totalBalance: number = 0;
     if (this.customers){
       this.customers.forEach(customer => {
-        totalBalance += customer.balance;
+        totalBalance += customer.income;
       })
     }
     return totalBalance;
@@ -54,7 +54,7 @@ export class CustomersComponent implements OnInit {
       });
     }
     else {
-      this.customersService.addClient(value);
+      this.customersService.addCustomer(value);
       this.customerForm.resetForm();
       this.closeModal();
     }
@@ -64,3 +64,5 @@ export class CustomersComponent implements OnInit {
     this.closeButton.nativeElement.click();
   }
 }
+
+

@@ -3,5 +3,5 @@ export interface CustomerModel {
   firstName?:string;
   lastName?:string;
   email?:string;
-  balance?:number;
+  income?:number;
 }

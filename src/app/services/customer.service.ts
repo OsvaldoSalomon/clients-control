@@ -5,18 +5,18 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 @Injectable()
-export class ClientService {
-  clientsCollection: AngularFirestoreCollection<CustomerModel>;
+export class CustomerService {
+  customersCollection: AngularFirestoreCollection<CustomerModel>;
   clientDoc: AngularFirestoreDocument<CustomerModel>;
   clients: Observable<CustomerModel[]>;
-  client: Observable<CustomerModel>;
+  customer: Observable<CustomerModel>;
 
   constructor(private db: AngularFirestore) {
-    this.clientsCollection = db.collection('clients', ref => ref.orderBy('firstName', 'asc'))
+    this.customersCollection = db.collection('clients', ref => ref.orderBy('firstName', 'asc'))
   }
 
   getCustomers(): Observable<CustomerModel[]>{
-    this.clients = this.clientsCollection.snapshotChanges().pipe(
+    this.clients = this.customersCollection.snapshotChanges().pipe(
       map(changes => {
         return changes.map(action => {
           const data = action.payload.doc.data() as CustomerModel;
@@ -28,13 +28,13 @@ export class ClientService {
     return this.clients;
   }
 
-  addClient(clientModel: CustomerModel){
-    this.clientsCollection.add(clientModel);
+  addCustomer(customerModel: CustomerModel){
+    this.customersCollection.add(customerModel);
   }
 
-  getClient(id:string){
+  getCustomer(id:string){
     this.clientDoc = this.db.doc<CustomerModel>(`clients/${id}`);
-    this.client = this.clientDoc.snapshotChanges().pipe(
+    this.customer = this.clientDoc.snapshotChanges().pipe(
       map(
         action=> {
           if (action.payload.exists === false){
@@ -47,16 +47,16 @@ export class ClientService {
           }
         })
     );
-    return this.client;
+    return this.customer;
   }
 
-  modifyClient(client: CustomerModel){
+  modifyCustomer(client: CustomerModel){
     this.clientDoc = this.db.doc(`clients/${client.id}`);
     this.clientDoc.update(client);
   }
 
-  deleteClient(client: CustomerModel){
-    this.clientDoc = this.db.doc(`clients/${client.id}`);
+  deleteCustomer(customer: CustomerModel){
+    this.clientDoc = this.db.doc(`clients/${customer.id}`);
     this.clientDoc.delete();
   }
 }

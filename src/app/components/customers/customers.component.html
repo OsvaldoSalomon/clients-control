@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addCustomerModel">
+        <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addModalCustomer">
           <i class="fas fa-plus"></i> add Customer
         </a>
       </div>
@@ -27,12 +27,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let client of customers; let i = index">
+              <tr *ngFor="let customer of customers; let i = index">
                 <td>{{i+1}}</td>
-                <td>{{client.firstName}} {{client.lastName}}</td>
-                <td>{{client.balance | currency: 'MNX': '$'}}</td>
+                <td>{{customer.firstName}} {{customer.lastName}}</td>
+                <td>{{customer.income | currency: 'MNX': '$'}}</td>
                 <td>
-                  <a routerLink="/client/edit/{{client.id}}" class="btn btn-secondary">
+                  <a routerLink="/client/edit/{{customer.id}}" class="btn btn-secondary">
                     <i class="fas fa-angle-double-right"></i>Edit
                   </a>
                 </td>
@@ -141,7 +141,7 @@
               name="balance"
               class="form-control"
               #balance="ngModel"
-              [(ngModel)]="customer.balance"
+              [(ngModel)]="customer.income"
               [ngClass]="{'is-invalid': balance.errors && balance.touched}"
               required>
             <div [hidden]="!balance.errors?.required" class="invalid-feedback">

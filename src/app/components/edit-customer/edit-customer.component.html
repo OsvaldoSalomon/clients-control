@@ -3,15 +3,14 @@
     <div class="row">
       <div class="col-md-6">
         <h1>
-          <i class="fas fa-user"></i>Edit Client
+          <i class="fas fa-user"></i> Edit Customer
         </h1>
       </div>
     </div>
   </div>
 </header>
 
-
-<form #clientForm="ngForm" (ngSubmit)="save(clientForm)">
+<form #customerForm="ngForm" (ngSubmit)="save(customerForm)">
 
   <flash-messages></flash-messages>
 
@@ -20,17 +19,18 @@
       <div class="row">
         <div class="col-md-3">
           <a routerLink="/" class="btn btn-light btn-block">
-            <i class="fas fa-arrow-left"></i> Return to Start
+            <i class="fas fa-arrow-left"></i> Return to Home
           </a>
         </div>
+
         <div class="col-md-3">
           <button type="submit" class="btn btn-success btn-block">
-            <i class="fas fa-check"></i> Update Client
+            <i class="fas fa-check"></i> Update Customer
           </button>
         </div>
         <div class="col-md-3">
           <a href="#" (click)="delete()" class="btn btn-danger btn-block">
-            <i class="fas fa-trash"></i> Delete Client
+            <i class="fas fa-trash"></i> Delete Customer
           </a>
         </div>
       </div>
@@ -50,7 +50,7 @@
                 <label for="firstName">First Name</label>
                 <input
                   #firstName="ngModel"
-                  [(ngModel)]="client.firstName"
+                  [(ngModel)]="customer.firstName"
                   [ngClass]="{'is-invalid': firstName.errors && firstName.touched}"
                   class="form-control"
                   minlength="2"
@@ -71,7 +71,7 @@
                   name="lastName"
                   class="form-control"
                   #lastName="ngModel"
-                  [(ngModel)]="client.lastName"
+                  [(ngModel)]="customer.lastName"
                   [ngClass]="{'is-invalid': lastName.errors && lastName.touched}"
                   required
                   minlength="2">
@@ -89,7 +89,7 @@
                   name="email"
                   class="form-control"
                   #email="ngModel"
-                  [(ngModel)]="client.email"
+                  [(ngModel)]="customer.email"
                   [ngClass]="{'is-invalid': email.errors && email.touched}"
                   pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                   required>
@@ -107,7 +107,7 @@
                   name="income"
                   class="form-control"
                   #income="ngModel"
-                  [(ngModel)]="client.balance"
+                  [(ngModel)]="customer.income"
                   [ngClass]="{'is-invalid': income.errors && income.touched}"
                   required>
                 <div [hidden]="!income.errors?.required" class="invalid-feedback">
@@ -120,6 +120,4 @@
       </div>
     </div>
   </section>
-
-
 </form>

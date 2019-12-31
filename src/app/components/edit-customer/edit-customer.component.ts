@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerModel } from "../../model/customer.model";
-import { ClientService } from "../../services/client.service";
+import { CustomerService } from "../../services/customer.service";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -11,17 +11,17 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class EditCustomerComponent implements OnInit {
 
-  client: CustomerModel = {
+  customer: CustomerModel = {
     firstName: '',
     lastName: '',
     email: '',
-    balance: 0
+    income: 0
   };
 
   id:string;
 
   constructor(
-    private clientsService: ClientService,
+    private customersService: CustomerService,
     private flashMessages: FlashMessagesService,
     private router: Router,
     private route: ActivatedRoute
@@ -29,8 +29,8 @@ export class EditCustomerComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-    this.clientsService.getClient(this.id).subscribe(client => {
-      this.client = client;
+    this.customersService.getCustomer(this.id).subscribe(customer => {
+      this.customer = customer;
     });
   }
 
@@ -42,14 +42,14 @@ export class EditCustomerComponent implements OnInit {
     }
     else {
       value.id = this.id;
-      this.clientsService.modifyClient(value);
+      this.customersService.modifyCustomer(value);
       this.router.navigate(['/']);
     }
   }
 
   delete(){
     if (confirm('Are you sure you want to delete the customer?')) {
-      this.clientsService.deleteClient(this.client);
+      this.customersService.deleteCustomer(this.customer);
       this.router.navigate(['/']);
     }
   }
