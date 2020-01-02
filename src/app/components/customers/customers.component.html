@@ -135,17 +135,17 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="balance">Balance</label>
+            <label for="income">Income</label>
             <input
               type="number"
-              name="balance"
+              name="income"
               class="form-control"
-              #balance="ngModel"
+              #income="ngModel"
               [(ngModel)]="customer.income"
-              [ngClass]="{'is-invalid': balance.errors && balance.touched}"
+              [ngClass]="{'is-invalid': income.errors && income.touched}"
               required>
-            <div [hidden]="!balance.errors?.required" class="invalid-feedback">
-              Balance required
+            <div [hidden]="!income.errors?.required" class="invalid-feedback">
+              Income required
             </div>
           </div>
         </div>
