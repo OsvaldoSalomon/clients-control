@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { environment } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
-import {AngularFirestoreModule, FirestoreSettingsToken} from "@angular/fire/firestore";
+import { AngularFirestoreModule, FirestoreSettingsToken } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { FlashMessagesModule } from "angular2-flash-messages";
 import { FormsModule } from "@angular/forms";
@@ -22,7 +22,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CustomerService } from "./services/customer.service";
 import { LoginService } from "./services/login.service";
 import { AuthGuard } from "./guardians/auth.guard";
-import {SettingsService} from "./services/settings.service";
+import { SettingsService } from "./services/settings.service";
+import { SettingsGuard } from "./guardians/settings.guard";
 
 @NgModule({
   declarations: [
@@ -51,8 +52,10 @@ import {SettingsService} from "./services/settings.service";
     LoginService,
     AuthGuard,
     SettingsService,
-    { provide: FirestoreSettingsToken, useValue:{} }
+    SettingsGuard,
+    {provide: FirestoreSettingsToken, useValue: {}}
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

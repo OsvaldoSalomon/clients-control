@@ -9,7 +9,8 @@ export class SettingsService {
   settings: Observable<SettingsModel>;
 
   // Unique id of the settings collection
-  id: '1';
+  id= '1';
+
   constructor(private db: AngularFirestore){}
 
   getSettings(): Observable<SettingsModel> {

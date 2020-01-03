@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from "../../services/login.service";
 import { Router } from "@angular/router";
-import { auth } from "firebase";
+import {SettingsService} from "../../services/settings.service";
 
 @Component({
   selector: 'app-header',
@@ -12,11 +12,12 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn: boolean;
   loggedInUser: string;
-  name: string;
+  allowRegistration: boolean;
 
   constructor(
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private settingsService: SettingsService
   ) { }
 
 
@@ -30,6 +31,9 @@ export class HeaderComponent implements OnInit {
         this.isLoggedIn = false;
       }
     });
+    this.settingsService.getSettings().subscribe(settings => {
+      this.allowRegistration = settings.allowRegistration;
+    })
   }
 
   logout(){
