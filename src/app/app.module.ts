@@ -52,8 +52,7 @@ import { SettingsGuard } from "./guardians/settings.guard";
     LoginService,
     AuthGuard,
     SettingsService,
-    SettingsGuard,
-    {provide: FirestoreSettingsToken, useValue: {}}
+    SettingsGuard
   ],
   bootstrap: [AppComponent]
 })

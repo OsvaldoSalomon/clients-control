@@ -25,6 +25,7 @@ export class SettingsComponent implements OnInit {
     )
   }
 
+
   save(){
     let settings = {allowRegistration: this.allowRegistration};
     this.settingsService.modifySettings(settings);

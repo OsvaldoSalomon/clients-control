@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from "../../services/login.service";
 import { Router } from "@angular/router";
-import {SettingsService} from "../../services/settings.service";
+import { SettingsService } from "../../services/settings.service";
 
 @Component({
   selector: 'app-header',
@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private settingsService: SettingsService
   ) { }
-
 
   ngOnInit() {
     this.loginService.getAuth().subscribe(auth => {
